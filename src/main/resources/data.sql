@@ -2,7 +2,9 @@
 INSERT INTO Auteurs (auteur_id, nom, prenom, biographie)
 VALUES
     (1, 'Doe', 'John', 'Auteur renommé avec de nombreuses œuvres publiées.'),
-    (2, 'Smith', 'Jane', 'Écrivaine primée et célèbre pour ses romans captivants.');
+    (2, 'Bigras', 'Raphael', 'Auteur renommé partout dans le monde.'),
+    (3, 'Derbali', 'Lotfi', 'Auteur renommé avec de nombreuses poemes publiés.'),
+    (4, 'Smith', 'Jane', 'Écrivaine primée et célèbre pour ses romans captivants.');
 
 -- Insertion de données dans la table Genres
 INSERT INTO Genres (genre_id, nom)
