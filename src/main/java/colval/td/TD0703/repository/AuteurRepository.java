@@ -6,4 +6,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface AuteurRepository extends JpaRepository<Auteur, Long> {
+
+    Auteur findAuteurById(Long id);
+    void deleteAuteurById(Long id);
 }
