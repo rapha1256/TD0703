@@ -6,7 +6,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface LivreRepository extends JpaRepository<Livre, Long> {
-    Livre findLivreById();
+    Livre findLivreById(Long id);
 
-    void deleteLivreById();
+    void deleteLivreById(Long id);
 }
