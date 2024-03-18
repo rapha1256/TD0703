@@ -21,7 +21,7 @@ public class UtilisateurController {
         this.utilisateurRepo = utilisateurRepo;
     }
 
-    @GetMapping("/getUtilisateurs")
+    @GetMapping("/getUtilisateursById")
     public Utilisateur getUtilisateurById(@RequestParam(name = "id") Long id) {
         System.out.println("Request received");
         Utilisateur result = utilisateurRepo.findUtilisateurById(id);

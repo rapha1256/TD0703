@@ -10,6 +10,7 @@ import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
@@ -24,6 +25,10 @@ public class AuteurController {
         this.auteurRepo = auteurRepo;
     }
 
+    @GetMapping("/getAuteurs")
+    public List<Auteur> getAllAuteurs() {
+        return auteurRepo.findAll();
+    }
     @GetMapping("/getAuteurById")
     public Auteur getAuteurById(@RequestParam(name = "id") Long id) {
         System.out.println("Request received");
@@ -33,21 +38,17 @@ public class AuteurController {
     }
 
     @PostMapping("/saveAuteur")
-    public ResponseEntity<Response> saveAuteur(@RequestHeader("invocationFrom") String invocationFrom,
+    public ResponseEntity<String> saveAuteur(@RequestHeader("invocationFrom") String invocationFrom,
                                                @RequestBody Auteur auteur) {
         logger.info(String.format("Header invocationFrom = %s", invocationFrom));
         auteurRepo.save(auteur);
-        Response response = new Response();
-        response.setStatus(200);
-        response.setMessage("Auteur successfully created");
         return ResponseEntity
                 .status(HttpStatus.CREATED)
-                .header("isAuteurSaved", "true")
-                .body(response);
+                .body("Auteur created:" + auteur.toString());
     }
 
     @PutMapping("/updateAuteur")
-    public ResponseEntity<Response> updateAuteur(@RequestHeader("invocationFrom") String invocationFrom,
+    public ResponseEntity<String> updateAuteur(@RequestHeader("invocationFrom") String invocationFrom,
                                                  @PathVariable Long id,
                                                  @RequestBody Auteur updatedAuteur) {
         logger.info(String.format("Header invocationFrom = %s", invocationFrom));
@@ -59,49 +60,34 @@ public class AuteurController {
         existingAuteur.setPrenom(updatedAuteur.getPrenom());
         existingAuteur.setBiographie(updatedAuteur.getBiographie());
         auteurRepo.save(existingAuteur);
-        Response response = new Response();
-        response.setStatus(200);
-        response.setMessage("Auteur updated successfully");
-        return ResponseEntity.status(HttpStatus.OK)
-                .header("isAuteurUpdated", "true")
-                .body(response);
+        return ResponseEntity
+                .status(HttpStatus.CREATED)
+                .body("Auteur updated: " + updatedAuteur);
     }
 
 
     @DeleteMapping("/deleteAuteur")
-    public ResponseEntity<Response> deleteAuteur(RequestEntity<Auteur> requestEntity) {
-        HttpHeaders headers = requestEntity.getHeaders();
-        headers.forEach((key, value)-> {
-            logger.info(String.format("Header = '%s' = %s", key, value.stream().collect(Collectors.joining("|"))));
-        });
-        Auteur auteur = requestEntity.getBody();
-        auteurRepo.deleteAuteurById(auteur.getId());
-        Response response = new Response();
-        response.setStatus(200);
-        response.setMessage("Auteur deleted successfully");
+    public ResponseEntity<String> deleteAuteur(@RequestParam(name = "id") Long id) {
+        auteurRepo.deleteAuteurById(id);
         return ResponseEntity
-                .status(200)
-                .body(response);
+                .status(HttpStatus.OK)
+                .body("Auteur deleted from db:" + auteurRepo.findAuteurById(id).toString());
     }
 
     @PatchMapping("/closeAuteur")
-    public ResponseEntity<Response> closeAuteur(@RequestBody Auteur auteurReq) {
+    public ResponseEntity<String> closeAuteur(@RequestBody Auteur auteurReq) {
         Response response = new Response();
         Auteur auteur = auteurRepo.findAuteurById(auteurReq.getId());
         if (auteur != null) {
             auteurRepo.save(auteur);
         } else {
-            response.setStatus(400);
-            response.setMessage("Invalid auteur id wad received");
             return ResponseEntity
                     .status(HttpStatus.BAD_REQUEST)
-                    .body(response);
+                    .body("");
         }
-        response.setStatus(200);
-        response.setMessage("Auteur successfully closed");
         return ResponseEntity
                 .status(HttpStatus.OK)
-                .body(response);
+                .body("");
     }
 
 

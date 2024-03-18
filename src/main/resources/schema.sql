@@ -1,6 +1,6 @@
 -- Table des Auteurs
 CREATE TABLE Auteurs (
-    auteur_id INT PRIMARY KEY,
+    auteur_id INT AUTO_INCREMENT PRIMARY KEY ,
     nom VARCHAR(100) NOT NULL,
     prenom VARCHAR(100) NOT NULL,
     biographie TEXT
