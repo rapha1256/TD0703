@@ -27,6 +27,7 @@ public class AuteurController {
 
     @GetMapping("/getAuteurs")
     public List<Auteur> getAllAuteurs() {
+        System.out.println("Fetching all auteurs...");
         return auteurRepo.findAll();
     }
     @GetMapping("/getAuteurById")
@@ -44,10 +45,10 @@ public class AuteurController {
         auteurRepo.save(auteur);
         return ResponseEntity
                 .status(HttpStatus.CREATED)
-                .body("Auteur created:" + auteur.toString());
+                .body("Auteur created:" + auteur);
     }
 
-    @PutMapping("/updateAuteur")
+    @PutMapping("/updateAuteur/{id}")
     public ResponseEntity<String> updateAuteur(@RequestHeader("invocationFrom") String invocationFrom,
                                                  @PathVariable Long id,
                                                  @RequestBody Auteur updatedAuteur) {
@@ -61,33 +62,33 @@ public class AuteurController {
         existingAuteur.setBiographie(updatedAuteur.getBiographie());
         auteurRepo.save(existingAuteur);
         return ResponseEntity
-                .status(HttpStatus.CREATED)
+                .status(HttpStatus.OK)
                 .body("Auteur updated: " + updatedAuteur);
     }
 
 
     @DeleteMapping("/deleteAuteur")
     public ResponseEntity<String> deleteAuteur(@RequestParam(name = "id") Long id) {
-        auteurRepo.deleteAuteurById(id);
+        auteurRepo.deleteById(id);
         return ResponseEntity
                 .status(HttpStatus.OK)
-                .body("Auteur deleted from db:" + auteurRepo.findAuteurById(id).toString());
+                .body("Auteur with this id deleted from db:" + id);
     }
 
     @PatchMapping("/closeAuteur")
-    public ResponseEntity<String> closeAuteur(@RequestBody Auteur auteurReq) {
-        Response response = new Response();
-        Auteur auteur = auteurRepo.findAuteurById(auteurReq.getId());
-        if (auteur != null) {
-            auteurRepo.save(auteur);
+    public ResponseEntity<String> closeAuteur(@RequestHeader("invocationFrom") String invocationFrom,
+                                              @RequestBody Auteur auteurReq) {
+        logger.info(String.format("Header invocationFrom = %s", invocationFrom));
+        if (auteurReq != null) {
+            auteurRepo.save(auteurReq);
         } else {
             return ResponseEntity
                     .status(HttpStatus.BAD_REQUEST)
-                    .body("");
+                    .body("Request was unsuccessful");
         }
         return ResponseEntity
                 .status(HttpStatus.OK)
-                .body("");
+                .body("Request was successful");
     }
 
 
