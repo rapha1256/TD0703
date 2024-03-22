@@ -14,14 +14,14 @@ CREATE TABLE Genres (
 
 -- Table des Livres
 CREATE TABLE Livres (
-                        livre_id INT PRIMARY KEY,
-                        titre VARCHAR(255) NOT NULL,
-                        auteur_id INT,
-                        genre_id INT,
-                        edition VARCHAR(50),
-                        disponibilite BOOLEAN,
-                        FOREIGN KEY (auteur_id) REFERENCES Auteurs(auteur_id),
-                        FOREIGN KEY (genre_id) REFERENCES Genres(genre_id)
+    livre_id INT AUTO_INCREMENT PRIMARY KEY,
+    titre VARCHAR(255) NOT NULL,
+    auteur_id INT,
+    genre_id INT,
+    edition VARCHAR(50),
+    disponibilite BOOLEAN,
+    FOREIGN KEY (auteur_id) REFERENCES Auteurs(auteur_id),
+    FOREIGN KEY (genre_id) REFERENCES Genres(genre_id)
 );
 
 -- Table des Exemplaires

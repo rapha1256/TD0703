@@ -14,11 +14,11 @@ VALUES
     (3, 'Thriller');
 
 -- Insertion de données dans la table Livres
-INSERT INTO Livres (livre_id, titre, auteur_id, genre_id, edition, disponibilite)
+INSERT INTO Livres (titre, auteur_id, genre_id, edition, disponibilite)
 VALUES
-    (1, 'Étranger', 1, 1, 'Édition XYZ', true),
-    (2, 'Le Guide du voyageur galactique', 2, 2, 'Édition ABC', true),
-    (3, 'Gone Girl', 1, 3, 'Édition 123', false);
+    ('Étranger', 1, 1, 'Édition XYZ', true),
+    ('Le Guide du voyageur galactique', 2, 2, 'Édition ABC', true),
+    ('Gone Girl', 1, 3, 'Édition 123', false);
 
 -- Insertion de données dans la table Exemplaires
 INSERT INTO Exemplaires (exemplaire_id, livre_id, statut)
