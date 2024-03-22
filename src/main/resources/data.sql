@@ -30,10 +30,10 @@ VALUES
     (5, 3, 'Disponible');
 
 -- Insertion de données dans la table Utilisateurs
-INSERT INTO Utilisateurs (utilisateur_id, nom, prenom, adresse_email, mot_de_passe_hashed, role)
+INSERT INTO Utilisateurs (nom, prenom, adresse_email, mot_de_passe_hashed, role)
 VALUES
-    (1, 'Dupont', 'Alice', 'alice@example.com', 'hashed_password', 'Utilisateur'),
-    (2, 'Martin', 'Bob', 'bob@example.com', 'hashed_password', 'Bibliothecaire');
+    ('Dupont', 'Alice', 'alice@example.com', 'hashed_password', 'Utilisateur'),
+    ('Martin', 'Bob', 'bob@example.com', 'hashed_password', 'Bibliothecaire');
 
 -- Insertion de données dans la table Emprunts
 INSERT INTO Emprunts (emprunt_id, utilisateur_id, exemplaire_id, date_emprunt, date_retour_prevue, statut)

@@ -34,7 +34,7 @@ CREATE TABLE Exemplaires (
 
 -- Table des Utilisateurs
 CREATE TABLE Utilisateurs (
-    utilisateur_id INT PRIMARY KEY,
+    utilisateur_id INT AUTO_INCREMENT PRIMARY KEY,
     nom VARCHAR(100) NOT NULL,
     prenom VARCHAR(100) NOT NULL,
     adresse_email VARCHAR(255) UNIQUE,

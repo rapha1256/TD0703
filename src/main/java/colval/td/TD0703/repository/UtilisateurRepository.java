@@ -8,6 +8,4 @@ import org.springframework.stereotype.Repository;
 public interface UtilisateurRepository extends JpaRepository<Utilisateur, Long> {
 
     Utilisateur findUtilisateurById(Long id);
-
-    void deleteUtilisateurById(Long id);
 }
