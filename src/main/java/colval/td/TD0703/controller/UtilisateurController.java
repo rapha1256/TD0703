@@ -68,14 +68,14 @@ public class UtilisateurController {
                 .body("Auteur updated: " + updatedUtilisateur);
     }
     @DeleteMapping("/deleteUtilisateur")
-    public ResponseEntity<String> deleteAuteur(@RequestParam(name = "id") Long id) {
+    public ResponseEntity<String> deleteUtilisateur(@RequestParam(name = "id") Long id) {
         System.out.println("Deleting user with id: " + id);
         utilisateurRepo.deleteById(id);
         return ResponseEntity
                 .status(HttpStatus.OK)
                 .body("Utilisateur with this id deleted from db:" + id);
     }
-    @PatchMapping
+    @PatchMapping("/closeUtilisateur")
     public ResponseEntity<String> closeUtilisateur(@RequestHeader("invocationFrom") String invocationFrom,
                                               @RequestBody Utilisateur utilisateurReq) {
         logger.info(String.format("Header invocationFrom = %s", invocationFrom));
