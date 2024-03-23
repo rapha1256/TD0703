@@ -8,4 +8,6 @@ import org.springframework.stereotype.Repository;
 public interface AuteurRepository extends JpaRepository<Auteur, Long> {
 
     Auteur findAuteurById(Long id);
+
+    Auteur findAuteurByNomAndPrenom(String nom, String prenom);
 }
