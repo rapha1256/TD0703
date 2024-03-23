@@ -13,11 +13,11 @@ public class Reservation {
     @Column(name = "reservation_id")
     private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "utilisateur_id", referencedColumnName = "utilisateur_id")
     private Utilisateur utilisateur;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "livre_id", referencedColumnName = "livre_id")
     private Livre livre;
 

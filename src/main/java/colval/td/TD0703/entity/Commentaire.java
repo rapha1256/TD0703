@@ -13,11 +13,11 @@ public class Commentaire {
     @Column(name = "commentaire_id")
     private Long id;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "utilisateur_id", referencedColumnName = "utilisateur_id")
     private Utilisateur utilisateur;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "livre_id", referencedColumnName = "livre_id")
     private Livre livre;
 

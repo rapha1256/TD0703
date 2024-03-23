@@ -13,7 +13,7 @@ public class Emprunt {
     @Column(name = "emprunt_id")
     private Long id;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "utilisateur_id", referencedColumnName = "utilisateur_id")
     private Utilisateur utilisateur;
 

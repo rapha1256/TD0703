@@ -17,11 +17,11 @@ public class Livre {
     @Column(name = "titre")
     private String titre;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "auteur_id", referencedColumnName = "auteur_id")
     private Auteur auteur;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "genre_id", referencedColumnName = "genre_id")
     private Genre genre;
 
